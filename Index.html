@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHER · light luxury dining</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google fonts: modern serif + clean sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;600&family=Zilla+Slab:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- COLOR THEME (different model) ----------
+       No black, no gold. Soft lavender, dusty rose, olive, warm taupe.
+       Inspired by Mediterranean dawn.
+    */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --mist: #f7f3f0;           /* background base – warm off-white */
+      --lavender: #b2a4d4;        /* soft lavender, used in accents */
+      --dusty-rose: #dba9a9;       /* warm pinkish tone */
+      --olive: #9b9b7a;            /* muted green */
+      --taupe: #c0b2a6;            /* warm grey for textures */
+      --deep-lavender: #7c6a9c;    /* deeper purple for headings */
+      --text-dark: #4a4450;        /* plum-grey */
+      --text-soft: #625b68;        
+      --shadow: 0 20px 30px -12px rgba(100, 80, 110, 0.2);
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: var(--mist);
+      color: var(--text-dark);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Zilla Slab', serif;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--deep-lavender);
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background: var(--dusty-rose);
+    }
+
+    /* navigation – light taupe with blur */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(192, 178, 166, 0.3); /* taupe transparent */
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 15px rgba(150, 130, 140, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--lavender);
+    }
+
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--deep-lavender);
+    }
+    .logo span {
+      color: var(--dusty-rose);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-dark);
+      transition: 0.2s;
+      font-size: 1.05rem;
+    }
+    .nav-links a:hover {
+      color: var(--dusty-rose);
+    }
+    .nav-reserve {
+      background: var(--deep-lavender);
+      color: white !important;
+      padding: 0.5rem 1.8rem;
+      border-radius: 40px;
+      border: 1px solid var(--lavender);
+    }
+    .nav-reserve:hover {
+      background: var(--lavender);
+      color: var(--text-dark) !important;
+    }
+
+    /* mobile menu placeholder */
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--deep-lavender);
+    }
+
+    /* hero canvas + content */
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 70px;
+    }
+    #hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      max-width: 900px;
+      padding: 2.5rem;
+      background: rgba(247, 243, 240, 0.5);
+      backdrop-filter: blur(6px);
+      border-radius: 60px;
+      border: 1px solid rgba(178, 164, 212, 0.5);
+    }
+    .hero h1 {
+      font-size: 5rem;
+      line-height: 1.1;
+      color: var(--deep-lavender);
+      text-shadow: 0 2px 8px rgba(255,255,250,0.8);
+    }
+    .hero p {
+      font-size: 1.3rem;
+      margin: 1.5rem 0 2.5rem;
+      color: var(--text-soft);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .btn {
+      padding: 1rem 2.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: 0.25s;
+      text-decoration: none;
+      display: inline-block;
+      border: 2px solid transparent;
+    }
+    .btn-primary {
+      background: var(--deep-lavender);
+      color: white;
+      box-shadow: 0 10px 20px -8px var(--deep-lavender);
+    }
+    .btn-primary:hover {
+      background: var(--lavender);
+      color: var(--text-dark);
+      transform: scale(1.02);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--dusty-rose);
+      color: var(--dusty-rose);
+    }
+    .btn-secondary:hover {
+      background: var(--dusty-rose);
+      color: white;
+    }
+
+    /* story section */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .story-text p {
+      font-size: 1.2rem;
+      color: var(--text-soft);
+      margin: 1.5rem 0;
+    }
+    .story-visual {
+      background: linear-gradient(145deg, #e9dbd1, #d7c5bc);
+      padding: 2rem;
+      border-radius: 40px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .story-visual i {
+      font-size: 4.5rem;
+      color: var(--deep-lavender);
+      background: rgba(255, 255, 255, 0.5);
+      width: 110px;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 30px;
+      box-shadow: 0 8px 12px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+    .story-visual i:hover {
+      color: var(--dusty-rose);
+      transform: rotate(3deg) scale(1.02);
+    }
+
+    /* menu filter & cards */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--olive);
+      padding: 0.6rem 2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      color: var(--text-dark);
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--olive);
+      color: white;
+      border-color: var(--olive);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .dish-card {
+      background: white;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+    .dish-card:hover {
+      transform: scale(1.02) translateY(-8px);
+      box-shadow: 0 30px 40px -15px var(--lavender);
+    }
+    .card-img {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #c9b6ae; /* fallback */
+      font-size: 4rem;
+    }
+    .card-info {
+      padding: 1.8rem 1.5rem 1.5rem;
+    }
+    .card-info h3 {
+      font-size: 1.8rem;
+      color: var(--deep-lavender);
+    }
+    .card-info p {
+      color: var(--text-soft);
+      margin: 0.6rem 0;
+    }
+    .price {
+      font-weight: 600;
+      color: var(--dusty-rose);
+      font-size: 1.5rem;
+      font-family: 'Zilla Slab', serif;
+    }
+
+    /* signature dish */
+    .signature-row {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+    .signature-card {
+      flex: 1 1 280px;
+      background: linear-gradient(145deg, #f1e3de, #faece5);
+      border-radius: 40px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: 0.4s;
+      transform-style: preserve-3d;
+      transform: perspective(1000px) rotateY(0deg);
+      border: 1px solid rgba(178, 164, 212, 0.5);
+    }
+    .signature-card:hover {
+      transform: perspective(1000px) rotateY(2deg) rotateX(1deg);
+      background: #fff4ed;
+    }
+    .signature-card i {
+      font-size: 3.5rem;
+      color: var(--dusty-rose);
+      margin-bottom: 1rem;
+    }
+    .chef-note {
+      font-style: italic;
+      color: var(--deep-lavender);
+      background: rgba(219, 169, 169, 0.15);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      margin: 1rem 0;
+    }
+
+    /* gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-auto-rows: 250px;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .gallery-item {
+      border-radius: 30px;
+      background: var(--taupe);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+    .gallery-item.large {
+      grid-row: span 2;
+      grid-column: span 2;
+    }
+    .gallery-item .overlay {
+      position: absolute;
+      bottom: 0;
+      background: linear-gradient(transparent, rgba(124, 106, 156, 0.7));
+      color: white;
+      width: 100%;
+      padding: 1.5rem 1rem 1rem;
+      transform: translateY(100%);
+      transition: 0.3s;
+    }
+    .gallery-item:hover .overlay {
+      transform: translateY(0);
+    }
+
+    /* testimonial carousel */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      padding: 2rem 0;
+    }
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .testimonial-card {
+      flex: 0 0 350px;
+      margin-right: 2rem;
+      background: white;
+      border-radius: 30px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border-left: 6px solid var(--dusty-rose);
+    }
+    .stars {
+      color: var(--dusty-rose);
+      margin: 0.8rem 0;
+    }
+    .carousel-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .carousel-btns button {
+      background: var(--deep-lavender);
+      border: none;
+      color: white;
+      width: 48px;
+      height: 48px;
+      border-radius: 30px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* reservation + contact */
+    .reserve-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      background: rgba(192, 178, 166, 0.2);
+      border-radius: 50px;
+      padding: 3rem;
+      backdrop-filter: blur(4px);
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border: 2px solid transparent;
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      background: white;
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--lavender);
+    }
+    .reserve-btn {
+      background: var(--deep-lavender);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .contact-info i {
+      color: var(--dusty-rose);
+      margin-right: 0.8rem;
+    }
+    .map-placeholder {
+      background: var(--taupe);
+      height: 200px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--deep-lavender);
+      margin-top: 1rem;
+    }
+
+    /* footer */
+    footer {
+      background: #b8a99e; /* taupe darker */
+      color: #fdf1ea;
+      padding: 3rem 3rem 1.5rem;
+      border-top: 5px solid var(--lavender);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .footer-logo {
+      font-family: 'Zilla Slab', serif;
+      font-size: 2.2rem;
+      color: var(--mist);
+    }
+    .footer-grid a {
+      color: #f0e2d5;
+      text-decoration: none;
+      display: block;
+      margin: 0.5rem 0;
+    }
+    .newsletter input {
+      padding: 0.8rem;
+      border-radius: 50px;
+      border: none;
+      width: 70%;
+    }
+    .newsletter button {
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      background: var(--dusty-rose);
+      border: none;
+      color: white;
+      font-weight: 600;
+    }
+    .copyright {
+      text-align: center;
+      margin-top: 4rem;
+      color: #e6d6c8;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: block; }
+      .hero h1 { font-size: 3.5rem; }
+      .story-grid, .reserve-grid { grid-template-columns: 1fr; }
+      .gallery-item.large { grid-row: span 1; grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">AETHER<span>.</span></div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#story">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reserve" class="nav-reserve">Reserve</a>
+    </div>
+    <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+  </nav>
+
+  <section class="hero" id="home">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <h1>Where light meets flavour.</h1>
+      <p>Fresh, honest ingredients and a sun‑drenched atmosphere — welcome to a new kind of luxury.</p>
+      <div class="btn-group">
+        <a href="#menu" class="btn btn-primary">Explore Menu</a>
+        <a href="#reserve" class="btn btn-secondary">Reserve a Table</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="story">
+    <h2 class="section-title">Our story</h2>
+    <div class="story-grid">
+      <div class="story-text">
+        <p>AETHER was born from the soft light of dawn over the olive groves. We believe that luxury should feel gentle, not imposing — like a warm breeze.</p>
+        <p>Our kitchen celebrates the subtle tones of heirloom vegetables, wild herbs, and sustainable seafood. Every plate is a quiet composition.</p>
+        <p><i class="fas fa-feather-alt" style="color: var(--lavender);"></i>  Light · Pure · Welcoming</p>
+      </div>
+      <div class="story-visual">
+        <i class="fas fa-seedling"></i>
+        <i class="fas fa-egg"></i>
+        <i class="fas fa-wine-bottle"></i>
+        <i class="fas fa-bread-slice"></i>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="menu">
+    <h2 class="section-title">Seasonal menu</h2>
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="small">Small Plates</button>
+      <button class="filter-btn" data-category="main">Main Dishes</button>
+      <button class="filter-btn" data-category="dessert">Desserts</button>
+      <button class="filter-btn" data-category="drinks">Signature Drinks</button>
+    </div>
+    <div class="menu-grid" id="menu-grid"></div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Signature dishes</h2>
+    <div class="signature-row">
+      <div class="signature-card">
+        <i class="fas fa-sun"></i>
+        <h3>Burnt honey & lavender</h3>
+        <p>Sheep yoghurt, pistachio, edible flowers</p>
+        <div class="chef-note">“tastes like a quiet morning”</div>
+        <div class="pairing" style="color: var(--olive);"><i class="fas fa-wine-glass-alt"></i> Pair with rosemary spritz</div>
+      </div>
+      <div class="signature-card">
+        <i class="fas fa-fish"></i>
+        <h3>Citrus cured sea bream</h3>
+        <p>Fennel, olive, sorrel</p>
+        <div class="chef-note">“bright as the mediterranean”</div>
+        <div class="pairing" style="color: var(--olive);"><i class="fas fa-wine-glass-alt"></i> Pair with vermentino</div>
+      </div>
+      <div class="signature-card">
+        <i class="fas fa-cake"></i>
+        <h3>Olive oil & rosemary cake</h3>
+        <p>Whipped ricotta, blood orange</p>
+        <div class="chef-note">“earthy & fragrant”</div>
+        <div class="pairing" style="color: var(--olive);"><i class="fas fa-coffee"></i> Pair with chamomile infusion</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gallery">
+    <h2 class="section-title">Atmosphere</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0e?w=400');"><div class="overlay">Dining room</div></div>
+      <div class="gallery-item large" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500');"><div class="overlay">Chef's counter</div></div>
+      <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=400');"><div class="overlay">Sun terrace</div></div>
+      <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400');"><div class="overlay">Open kitchen</div></div>
+      <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400');"><div class="overlay">Private lounge</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Guest experiences</h2>
+    <div class="carousel-container">
+      <div class="testimonial-track" id="testimonialTrack">
+        <div class="testimonial-card"><i class="fas fa-quote-left" style="color:var(--dusty-rose);"></i><p>Every detail felt intentional, yet relaxed. The lavender yoghurt is unforgettable.</p><div class="stars">★★★★★</div><h4>— Elara V.</h4></div>
+        <div class="testimonial-card"><i class="fas fa-quote-left" style="color:var(--dusty-rose);"></i><p>A light, airy space with food that sings. The wine list is beautifully edited.</p><div class="stars">★★★★★</div><h4>— Samir N.</h4></div>
+        <div class="testimonial-card"><i class="fas fa-quote-left" style="color:var(--dusty-rose);"></i><p>Finally a “luxury” place that doesn’t feel stuffy. Just pure warmth.</p><div class="stars">★★★★☆</div><h4>— Chiara D.</h4></div>
+      </div>
+    </div>
+    <div class="carousel-btns">
+      <button id="prevTestimonial"><i class="fas fa-arrow-left"></i></button>
+      <button id="nextTestimonial"><i class="fas fa-arrow-right"></i></button>
+    </div>
+  </section>
+
+  <section class="section" id="reserve">
+    <h2 class="section-title">Reserve your table</h2>
+    <div class="reserve-grid">
+      <div class="reserve-form">
+        <form id="reserveForm">
+          <div class="form-group"><input type="text" placeholder="Full name" required></div>
+          <div class="form-group"><input type="email" placeholder="Email address" required></div>
+          <div class="form-group"><input type="tel" placeholder="Phone number"></div>
+          <div class="form-group"><input type="number" placeholder="Number of guests" min="1" required></div>
+          <div class="form-group"><input type="date" required></div>
+          <div class="form-group"><input type="time" required></div>
+          <button type="submit" class="reserve-btn">Complete reservation</button>
+          <p id="reserveConfirm" style="margin-top:1rem; color:var(--deep-lavender);"></p>
+        </form>
+      </div>
+      <div class="contact-info">
+        <p><i class="fas fa-phone-alt"></i> (415) 555 0199</p>
+        <p><i class="fas fa-envelope"></i> hello@aether.dining</p>
+        <p><i class="fas fa-map-pin"></i> 12 Sea Cliff Ave, San Francisco</p>
+        <div class="map-placeholder"><i class="fas fa-map-marked-alt"></i> Open map</div>
+        <p style="margin-top:2rem;"><i class="fas fa-clock"></i> Wed–Sun 5pm – 10pm</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div><div class="footer-logo">AETHER.</div><p style="margin-top:1rem;">Light luxury dining</p></div>
+      <div><h4>Explore</h4><a href="#">Home</a><a href="#story">Story</a><a href="#menu">Menu</a><a href="#gallery">Gallery</a></div>
+      <div><h4>Contact</h4><a href="#">+1 415 555 0199</a><a href="#">reserve@aether.dining</a><div style="font-size:1.5rem;"><i class="fab fa-instagram"></i> <i class="fab fa-pinterest"></i></div></div>
+      <div class="newsletter"><h4>Newsletter</h4><input type="email" placeholder="your@email.com"><button>→</button></div>
+    </div>
+    <div class="copyright">© 2025 AETHER · designed with soft light</div>
+  </footer>
+
+  <script>
+    (function() {
+      // ---------- floating particles (lavender & rose tones) ----------
+      const canvas = document.getElementById('hero-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+
+      function initParticles() {
+        width = canvas.clientWidth;
+        height = canvas.clientHeight;
+        canvas.width = width;
+        canvas.height = height;
+        particles = [];
+        for (let i = 0; i < 60; i++) {
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: 5 + Math.random() * 12,
+            speedX: (Math.random() - 0.5) * 0.2,
+            speedY: (Math.random() - 0.5) * 0.15,
+            color: `rgba(${Math.random() > 0.5 ? '178,164,212' : '219,169,169'}, ${0.2 + Math.random()*0.2})`
+          });
+        }
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, 2*Math.PI);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          p.x += p.speedX;
+          p.y += p.speedY;
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+        });
+        requestAnimationFrame(animateParticles);
+      }
+      window.addEventListener('resize', initParticles);
+      initParticles();
+      animateParticles();
+
+      // ---------- dynamic menu ----------
+      const menuData = [
+        { name: 'Lavender labneh', desc: 'burnt honey, pistachio, flatbread', price: 14, category: 'small', icon: '🌸' },
+        { name: 'Heirloom tomatoes', desc: 'olive oil, basil, sea salt', price: 12, category: 'small', icon: '🍅' },
+        { name: 'Grilled octopus', desc: 'smoked paprika, lemon', price: 19, category: 'small', icon: '🐙' },
+        { name: 'Olive oil poached cod', desc: 'fennel, orange, saffron', price: 36, category: 'main', icon: '🐟' },
+        { name: 'Risotto primavera', desc: 'asparagus, peas, mint', price: 28, category: 'main', icon: '🍚' },
+        { name: 'Herb roasted chicken', desc: 'chardonnay jus, spring onions', price: 32, category: 'main', icon: '🍗' },
+        { name: 'Rosemary olive oil cake', desc: 'ricotta, blood orange', price: 13, category: 'dessert', icon: '🍊' },
+        { name: 'Chocolate & olive oil mousse', desc: 'fleur de sel', price: 14, category: 'dessert', icon: '🍫' },
+        { name: 'Lavender bee’s knees', desc: 'gin, honey, lemon', price: 16, category: 'drinks', icon: '🍸' },
+        { name: 'Vermentino (glass)', desc: 'sardinian white', price: 14, category: 'drinks', icon: '🥂' }
+      ];
+      const menuGrid = document.getElementById('menu-grid');
+      function renderMenu(cat = 'all') {
+        const filtered = cat === 'all' ? menuData : menuData.filter(i => i.category === cat);
+        menuGrid.innerHTML = filtered.map(i => `
+          <div class="dish-card">
+            <div class="card-img">${i.icon}</div>
+            <div class="card-info">
+              <h3>${i.name}</h3>
+              <p>${i.desc}</p>
+              <span class="price">$${i.price}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+      renderMenu();
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderMenu(btn.dataset.category);
+        });
+      });
+
+      // ---------- testimonial carousel ----------
+      const track = document.getElementById('testimonialTrack');
+      const prev = document.getElementById('prevTestimonial');
+      const next = document.getElementById('nextTestimonial');
+      let pos = 0;
+      const cardWidth = 350 + 32;
+      const max = track.children.length - 1;
+      next.addEventListener('click', () => { pos = pos < max ? pos+1 : 0; track.style.transform = `translateX(-${pos * cardWidth}px)`; });
+      prev.addEventListener('click', () => { pos = pos > 0 ? pos-1 : max; track.style.transform = `translateX(-${pos * cardWidth}px)`; });
+
+      // ---------- reservation confirmation ----------
+      document.getElementById('reserveForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.getElementById('reserveConfirm').innerText = '✓ Thank you. Your request is confirmed.';
+        this.reset();
+      });
+
+      // smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+          e.preventDefault();
+          const t = document.querySelector(this.getAttribute('href'));
+          if(t) t.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
